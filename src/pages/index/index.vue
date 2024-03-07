@@ -1,48 +1,51 @@
 <template>
   <view class="content">
-    <image class="logo" src="/static/logo.png"></image>
-    <view class="text-area">
-      <text class="title">{{ title }}</text>
-    </view>
+    <div class="text-area" v-for="item in list" :key="item.text">
+      <up-button type="primary" :text="item.text" @click="goPath()" />
+    </div>
   </view>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      title: 'Hello',
-    }
+<script setup>
+import { ref } from "vue";
+const list = ref([
+  {
+    text: "点赞",
+    color: "blue",
+    fontSize: 28
   },
-  onLoad() {},
-  methods: {},
+  {
+    text: "分享"
+  },
+  {
+    text: "评论"
+  }
+]);
+
+const show = ref(true);
+
+function goPath() {
+  uni.navigateTo({
+    url: "/pages/brandRegister/index"
+  });
 }
+// export default {
+//   data() {
+//     return {
+//       title: "Hello"
+//     };
+//   },
+//   onLoad() {},
+//   methods: {}
+// };
 </script>
 
-<style>
+<style lang='scss'>
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin-top: 200rpx;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50rpx;
-}
-
-.text-area {
-  display: flex;
-  justify-content: center;
-}
-
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
+  background-image: url("/static/brandAssess/list-header.png");
 }
 </style>
